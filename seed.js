@@ -1,0 +1,81 @@
+const pool = require('./db');
+
+const products = [
+  { name: 'Premium Waterproof Raincoat', category: 'raincoat', price: '₹1,299',
+    image: '1.photos/Premium waterproof raincoat.jpeg',
+    description: 'Durable rain protection for everyday monsoon use.',
+    features: 'Waterproof,Durable,Comfortable,Multiple Sizes',
+    sizes: 'M,L,XL,XXL', colors: 'Black,Navy Blue,Yellow', tag: 'Popular' },
+  { name: 'Two-Piece Rain Suit', category: 'raincoat', price: '₹1,599',
+    image: '1.photos/Two-piece raincoat.jpeg',
+    description: 'Jacket and trouser combination for complete protection.',
+    features: 'Waterproof,Full Coverage,Durable,Lightweight',
+    sizes: 'M,L,XL,XXL', colors: 'Black,Navy Blue,Yellow', tag: null },
+  { name: 'Lightweight Raincoat', category: 'raincoat', price: '₹999',
+    image: '1.photos/Light Weight raincoat.jpeg',
+    description: 'Lightweight everyday rainwear that is easy to carry.',
+    features: 'Lightweight,Waterproof,Easy to Carry,Comfortable',
+    sizes: 'M,L,XL', colors: 'Black,Blue,Green', tag: null },
+  { name: 'Heavy-Duty Raincoat', category: 'raincoat', price: '₹1,899',
+    image: '1.photos/Heavy duty raincoat.jpeg',
+    description: 'Built for people working outdoors in demanding weather.',
+    features: 'Heavy Duty,Waterproof,Durable,Long Lasting',
+    sizes: 'L,XL,XXL,3XL', colors: 'Black,Navy Blue', tag: null },
+  { name: 'Waterproof Jacket', category: 'jacket', price: '₹1,499',
+    image: '1.photos/Stylish water proof jacket.jpeg',
+    description: 'Stylish waterproof jacket suitable for daily use.',
+    features: 'Waterproof,Stylish,Durable,Comfortable',
+    sizes: 'M,L,XL,XXL', colors: 'Black,Navy Blue,Grey', tag: null },
+  { name: 'Corporate Jacket', category: 'jacket', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Corporate jacket.jpeg',
+    description: 'Customizable jackets for companies and organizations.',
+    features: 'Custom Branding,Custom Colors,Logo Printing,Bulk Orders',
+    sizes: 'Custom Sizes Available', colors: 'Custom Colors Available', tag: null },
+  { name: 'Corporate Jacket (Orange)', category: 'jacket', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Corporate jacket(orange).jpeg',
+    description: 'Customizable jackets for companies and organizations.',
+    features: 'Custom Branding,Custom Colors,Logo Printing,Bulk Orders',
+    sizes: 'Custom Sizes Available', colors: 'Custom Colors Available', tag: null },
+  { name: 'Corporate Raincoat (Yellow)', category: 'raincoat', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Corporate jacket(Yellow).jpeg',
+    description: 'Customizable raincoats for corporate teams.',
+    features: 'Custom Branding,Custom Colors,Logo Printing,Bulk Orders',
+    sizes: 'Custom Sizes Available', colors: 'Custom Colors Available', tag: null },
+  { name: 'Corporate Rainwear', category: 'jacket', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Corporate rainwear.jpeg',
+    description: 'Customizable rainwear for companies and organizations.',
+    features: 'Custom Branding,Custom Colors,Logo Printing,Bulk Orders',
+    sizes: 'Custom Sizes Available', colors: 'Custom Colors Available', tag: null },
+  { name: 'Customized Raincoat', category: 'raincoat', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Customized raincoat.jpeg',
+    description: 'Fully customized raincoats with your branding.',
+    features: 'Custom Branding,Custom Colors,Logo Printing,Bulk Orders',
+    sizes: 'Custom Sizes Available', colors: 'Custom Colors Available', tag: null },
+  { name: 'Raincoat (Yellow)', category: 'raincoat', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Raincoat (YEllow).jpeg',
+    description: 'Bright yellow raincoat for high visibility.',
+    features: 'Waterproof,High Visibility,Durable',
+    sizes: 'M,L,XL,XXL', colors: 'Yellow', tag: null },
+  { name: 'Raincoat Mercury Taping Safari', category: 'raincoat', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Raincoat mercury taping safari (boy).jpeg',
+    description: 'Taped-seam raincoat for extra rain protection.',
+    features: 'Taped Seams,Waterproof,Durable',
+    sizes: 'M,L,XL,XXL', colors: 'Black,Navy', tag: null },
+  { name: 'Raincoat (Black)', category: 'raincoat', price: 'Contact Us for Bulk Pricing',
+    image: '1.photos/Raincoat(black).jpeg',
+    description: 'Classic black raincoat for daily use.',
+    features: 'Waterproof,Durable,Comfortable',
+    sizes: 'M,L,XL,XXL', colors: 'Black', tag: null }
+];
+
+module.exports = async function seed() {
+  for (const p of products) {
+    await pool.query(
+      `INSERT INTO products (name, category, price, image, description, features, sizes, colors, tag)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+      [p.name, p.category, p.price, p.image, p.description,
+       p.features, p.sizes, p.colors, p.tag]
+    );
+  }
+  console.log(`✅ Seeded ${products.length} products`);
+};

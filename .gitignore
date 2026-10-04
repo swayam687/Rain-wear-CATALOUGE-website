@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# secrets
+.env
+
+# uploaded images (they live on the server, not in git)
+public/uploads/
+
+# oneDrive / windows junk
+.DS_Store
+Thumbs.db
+*.log
+
+# editor
+.vscode/
+.idea/
